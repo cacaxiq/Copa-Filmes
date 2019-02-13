@@ -15,12 +15,7 @@ namespace CopaFilmes.Domain.Services
 	{
 		public async Task<ICommandResult> GetCopaFilmes()
 		{
-			CancellationTokenSource source = new CancellationTokenSource();
-			CancellationToken token = source.Token;
-
-			var copaFilmesResult = await GetAsync.ExecuteAsync("https://copadosfilmes.azurewebsites.net/api/filmes", token);
-
-			source.Cancel();
+			var copaFilmesResult = await GetAsync.ExecuteAsync("https://copadosfilmes.azurewebsites.net/api/filmes");
 
 			if (copaFilmesResult.Success)
 			{

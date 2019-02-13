@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CopaFilmes.Infra.PoliceHTTPs
 {
-    public static class GetAsync
+    public static class PostAsync
     {
-        public static async Task<Result<string>> ExecuteAsync(string url)
+        public static async Task<Result<string>> ExecuteAsync(string url, string data)
         {
             var response = new Result<string> { Success = false, Message = $"Falha requisição na api: {url}" };
 
@@ -23,9 +23,13 @@ namespace CopaFilmes.Infra.PoliceHTTPs
             {
                 await policy.ExecuteAsync(async () =>
                 {
-                    var result = await client.GetStringAsync(url);
 
-                    response = new Result<string> { Success = true, Content = result };
+                    var result = await client.PostAsync(url, new StringContent(data));
+
+                    result.EnsureSuccessStatusCode();
+                    string content = await result.Content.ReadAsStringAsync();
+
+                    response = new Result<string> { Success = true, Content = content };
 
                     ConsoleHelper.WriteLineInColor("Response : " + response.Content, ConsoleColor.Green);
                 });

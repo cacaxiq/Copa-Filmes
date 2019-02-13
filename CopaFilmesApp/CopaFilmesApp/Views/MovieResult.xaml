@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CopaFilmesApp.Views.MovieResult"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Resultado">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NumberStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#6e6e6e" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style x:Key="DescriptionStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="1º" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="2º" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Champion.Titulo}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding SecondPlace.Titulo}" />
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

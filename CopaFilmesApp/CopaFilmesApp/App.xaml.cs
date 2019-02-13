@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CopaFilmesApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,7 @@ namespace CopaFilmesApp
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new NavigationPage(new MovieList());
 		}
 
 		protected override void OnStart()
