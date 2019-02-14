@@ -39,7 +39,8 @@ namespace CopaFilmes.Api
                     "http://localhost:61203", 
                     "http://10.0.2.2:61203",
                     "http://127.0.0.1",
-                    "http://localhost", 
+                    "http://localhost:80",
+                    "http://localhost",
                     "http://10.0.2.2"));
             });
 
