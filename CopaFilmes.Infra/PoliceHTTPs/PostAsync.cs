@@ -2,6 +2,7 @@
 using Polly;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CopaFilmes.Infra.PoliceHTTPs
@@ -24,7 +25,7 @@ namespace CopaFilmes.Infra.PoliceHTTPs
                 await policy.ExecuteAsync(async () =>
                 {
 
-                    var result = await client.PostAsync(url, new StringContent(data));
+                    var result = await client.PostAsync(url, new StringContent(data, Encoding.UTF8, "application/json" ));
 
                     result.EnsureSuccessStatusCode();
                     string content = await result.Content.ReadAsStringAsync();

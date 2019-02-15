@@ -9,6 +9,8 @@ namespace CopaFilmesApp
 	{
 		public App()
 		{
+			LiveReload.Init();
+
 			InitializeComponent();
 
 			MainPage = new NavigationPage(new MovieList());

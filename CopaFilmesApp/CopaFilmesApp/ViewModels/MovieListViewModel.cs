@@ -42,7 +42,13 @@ namespace CopaFilmesApp.ViewModels
         }
         private async Task GenerateChampionship()
         {
-            var result = await page.DisplayAlert("Iniciar Campeonato", "Voce já pode comecar o campeonato.", "Sim", "Nao");
+			if (Movies.Count > 8)
+			{
+				await page.DisplayAlert("Aviso", "Limite de filmes removidos ainda não atingido.", "Ok");
+				return;
+			}
+
+			var result = await page.DisplayAlert("Iniciar Campeonato", "Voce já pode comecar o campeonato.", "Sim", "Nao");
 
             if (result)
             {
@@ -53,18 +59,8 @@ namespace CopaFilmesApp.ViewModels
         {
             IsRefresh = true;
             Movies.Clear();
-            //var list = await service.GetMovies();
+            var list = await service.GetMovies();
 
-            var list = new List<Movie>
-                {
-            new Movie("t1","ABCD",2018, 7.5),
-            new Movie("t2","bBCD",2018, 7.5),
-            new Movie("t3","cBCD",2018, 7.5),
-            new Movie("t4","dBCD",2018, 7.5),
-            new Movie("t5","eBCD",2018, 7.5),
-            new Movie("t6","fBCD",2018, 7.5),
-            new Movie("t7","gBCD",2018, 7.5),
-            new Movie("t8","hBCD",2018, 7.5)};
 
             if (list != null)
             {

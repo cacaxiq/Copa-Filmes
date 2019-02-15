@@ -3,12 +3,14 @@
     x:Class="CopaFilmesApp.Views.MovieResult"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Resultado">
+    Title="Resultado" BackgroundColor="#a8a8a8" Padding="20">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="NumberStyle" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="#6e6e6e" />
-                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="40" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
             <Style x:Key="DescriptionStyle" TargetType="Label">
