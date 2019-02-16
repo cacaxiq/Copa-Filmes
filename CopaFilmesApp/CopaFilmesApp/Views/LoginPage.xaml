@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CopaFilmesApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Padding="40,20">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label
+                FontAttributes="Bold"
+                FontSize="40"
+                HorizontalTextAlignment="Center"
+                Text="Copa Filmes" />
+            <Label
+                Margin="0,0,0,100"
+                FontSize="Default"
+                HorizontalTextAlignment="End"
+                Text="Campeonato" />
+            <Label Text="Login:" />
+            <Entry Text="{Binding UserName}" />
+            <Label Text="Senha:" />
+            <Entry Text="{Binding Senha}" />
+            <Button
+                Command="{Binding LoginCommand}"
+                Text="Acessar"
+                TextColor="White" />
+            <ActivityIndicator
+                IsRunning="True"
+                IsVisible="{Binding IsRefresh}"
+                WidthRequest="40" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

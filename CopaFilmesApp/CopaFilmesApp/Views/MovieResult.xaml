@@ -34,10 +34,13 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding LogoutCommand}" Text="Deslogar" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid ColumnSpacing="0" RowSpacing="20">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -45,6 +48,13 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
+
+            <ActivityIndicator
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                IsRunning="True"
+                IsVisible="{Binding IsRefresh}"
+                WidthRequest="40" />
 
             <Label
                 Grid.Row="0"

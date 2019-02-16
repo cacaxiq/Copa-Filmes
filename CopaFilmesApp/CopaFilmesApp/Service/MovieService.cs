@@ -4,9 +4,11 @@ using CopaFilmesApp.Models;
 using CopaFilmesApp.Service;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(MovieService))]
@@ -16,7 +18,18 @@ namespace CopaFilmesApp.Service
     {
         public async Task<IEnumerable<Models.Movie>> GetMovies()
         {
-            var moviesResult = await GetAsync.ExecuteAsync("https://copafilmes.azurewebsites.net/api/movies");
+            var oauthToken = string.Empty;
+
+            try
+            {
+                oauthToken = await SecureStorage.GetAsync("oauth_token");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            var moviesResult = await GetAsync.ExecuteAsync("https://copafilmes.azurewebsites.net/api/movies", oauthToken);
 
             if (moviesResult.Success)
             {
@@ -37,9 +50,25 @@ namespace CopaFilmesApp.Service
 
         public async Task<Models.ResutMovies> GetResultChampionship(IEnumerable<Movie> movies)
         {
+            if (movies == null)
+            {
+                throw new ArgumentNullException(nameof(movies));
+            }
+
+            var oauthToken = string.Empty;
+
+            try
+            {
+                oauthToken = await SecureStorage.GetAsync("oauth_token");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
             var data = JsonConvert.SerializeObject(movies);
 			var response = "{  \"movies\": " + data + "}";
-            var moviesResult = await PostAsync.ExecuteAsync("https://copafilmes.azurewebsites.net/api/movies", response);
+            var moviesResult = await PostAsync.ExecuteAsync("https://copafilmes.azurewebsites.net/api/movies", response, oauthToken);
 
             if (moviesResult.Success)
             {

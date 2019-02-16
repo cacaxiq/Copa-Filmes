@@ -1,8 +1,8 @@
 ﻿using CopaFilmesApp.Models;
 using CopaFilmesApp.Service;
 using CopaFilmesApp.Views;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -21,9 +21,14 @@ namespace CopaFilmesApp.ViewModels
                 throw new System.ArgumentNullException(nameof(service));
             }
 
-            GenerateChampionshipCommand = new Command(async () => await GenerateChampionship());
+            GenerateChampionshipCommand = new Command(async () => await GenerateChampionship(), () => CanExecuteGenerateChampionship());
             RefreshCommand = new Command(async () => await Refresh());
             RemoveMovieCommand = new Command<Movie>(RemoveMovie);
+        }
+
+        private bool CanExecuteGenerateChampionship()
+        {
+            return Movies.Count == 8;
         }
 
         private void RemoveMovie(Movie movie)
@@ -33,22 +38,22 @@ namespace CopaFilmesApp.ViewModels
                 page.DisplayAlert("Aviso", "Limite de filmes removidos atingido.", "Ok");
                 return;
             }
-            
+
             Movies.Remove(movie);
 
-            SelectedMovies = $"Selecionados {Movies.Count} de 8 filmes";
+            SelectedMovies = $"Selecionados {Movies.Count} de 8 filmes.";
 
             page.DisplayAlert("Sucesso", "Filmes removido.", "Ok");
         }
         private async Task GenerateChampionship()
         {
-			if (Movies.Count > 8)
-			{
-				await page.DisplayAlert("Aviso", "Limite de filmes removidos ainda não atingido.", "Ok");
-				return;
-			}
+            if (Movies.Count > 8)
+            {
+                await page.DisplayAlert("Aviso", "Limite de filmes removidos ainda não atingido.", "Ok");
+                return;
+            }
 
-			var result = await page.DisplayAlert("Iniciar Campeonato", "Voce já pode comecar o campeonato.", "Sim", "Nao");
+            var result = await page.DisplayAlert("Iniciar Campeonato", "Voce já pode comecar o campeonato.", "Sim", "Nao");
 
             if (result)
             {
@@ -78,9 +83,9 @@ namespace CopaFilmesApp.ViewModels
 
             IsRefresh = false;
         }
+        private readonly IMovieService service;
 
         public ObservableCollection<Models.Movie> Movies { get; set; }
-        private readonly IMovieService service;
 
         private string selectedMovies;
         public string SelectedMovies
@@ -93,24 +98,29 @@ namespace CopaFilmesApp.ViewModels
             }
         }
 
-        private bool isRefresh;
-        public bool IsRefresh
-        {
-            get { return isRefresh; }
-            set
-            {
-                isRefresh = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public ICommand GenerateChampionshipCommand { get; set; }
+        public Command GenerateChampionshipCommand { get; set; }
         public ICommand RemoveMovieCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
 
         public override async Task Inicialize()
         {
+            if (Movies != null)
+                Movies.CollectionChanged += MoviesCollectionChanged;
+
             await Refresh();
+        }
+
+        public override Task Destroy()
+        {
+            if (Movies != null)
+                Movies.CollectionChanged -= MoviesCollectionChanged;
+
+            return Task.CompletedTask;
+        }
+
+        void MoviesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            GenerateChampionshipCommand.ChangeCanExecute();
         }
     }
 }

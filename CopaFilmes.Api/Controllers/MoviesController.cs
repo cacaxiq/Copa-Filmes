@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CopaFilmes.Domain.Commands;
+﻿using CopaFilmes.Domain.Commands;
 using CopaFilmes.Domain.Handlers;
 using CopaFilmes.Domain.Services;
 using CopaFilmes.Infra.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CopaFilmes.Api.Controllers
 {
@@ -23,14 +21,14 @@ namespace CopaFilmes.Api.Controllers
             this.movieHandler = movieHandler;
         }
 
-        // GET api/values
+        [Authorize("Bearer")]
         [HttpGet]
         public async Task<ICommandResult> Get()
         {
             return await service.GetCopaFilmes();
         }
 
-        // GET api/values
+        [Authorize("Bearer")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(CommandResult))]
         public ICommandResult Post([FromBody] MoviesWinsCommand command)

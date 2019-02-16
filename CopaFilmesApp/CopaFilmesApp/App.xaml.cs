@@ -13,7 +13,7 @@ namespace CopaFilmesApp
 
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new MovieList());
+			MainPage = new NavigationPage(new LoginPage());
 		}
 
 		protected override void OnStart()

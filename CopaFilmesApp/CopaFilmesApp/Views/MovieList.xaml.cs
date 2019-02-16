@@ -13,12 +13,24 @@ namespace CopaFilmesApp.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new MovieListViewModel(this);
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         protected override void OnAppearing()
         {
             viewModel?.Inicialize().ConfigureAwait(false);
             base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            viewModel?.Destroy().ConfigureAwait(false);
+            base.OnDisappearing();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }
