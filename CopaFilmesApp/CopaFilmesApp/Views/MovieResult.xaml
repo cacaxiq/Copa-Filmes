@@ -3,18 +3,32 @@
     x:Class="CopaFilmesApp.Views.MovieResult"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Resultado" BackgroundColor="#a8a8a8" Padding="20">
+    Title="Resultado"
+    Padding="20"
+    BackgroundColor="#a8a8a8">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="NumberStyle" TargetType="Label">
-                <Setter Property="BackgroundColor" Value="#6e6e6e" />
+            <Style x:Key="baseLabel" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Padding" Value="10,20,20,20" />
+            </Style>
+            <Style
+                x:Key="NumberStyle"
+                BasedOn="{StaticResource baseLabel}"
+                TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#6e6e6e" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
-            <Style x:Key="DescriptionStyle" TargetType="Label">
-                <Setter Property="BackgroundColor" Value="White" />
+            <Style
+                x:Key="DescriptionStyle"
+                BasedOn="{StaticResource baseLabel}"
+                TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="TextColor" Value="Black" />
             </Style>
@@ -22,10 +36,10 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid>
+        <Grid ColumnSpacing="0" RowSpacing="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -35,22 +49,19 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
+                Style="{StaticResource NumberStyle}"
                 Text="1º" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
+                Style="{StaticResource NumberStyle}"
                 Text="2º" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="{Binding Champion.Titulo}" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding SecondPlace.Titulo}" />
-
-
-
+            <StackLayout Grid.Row="0" Grid.Column="1">
+                <Label Style="{StaticResource DescriptionStyle}" Text="{Binding Champion.Titulo}" />
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="1">
+                <Label Style="{StaticResource DescriptionStyle}" Text="{Binding SecondPlace.Titulo}" />
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
