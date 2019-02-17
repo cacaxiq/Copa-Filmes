@@ -19,7 +19,7 @@
             <Label Text="Login:" />
             <Entry Text="{Binding UserName}" />
             <Label Text="Senha:" />
-            <Entry Text="{Binding Senha}" />
+            <Entry IsPassword="True" Text="{Binding Senha}" />
             <Button
                 Command="{Binding LoginCommand}"
                 Text="Acessar"

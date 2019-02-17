@@ -25,7 +25,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopaFilmes.Infra", "CopaFil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaFilmes.Tests", "CopaFilmes.Tests\CopaFilmes.Tests.csproj", "{8896689A-5004-4426-884E-63AA6CB7CB09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaFilmes.Api", "CopaFilmes.Api\CopaFilmes.Api.csproj", "{4E02FC61-AE19-4FA4-A1D7-C294A76B43BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopaFilmes.Api", "CopaFilmes.Api\CopaFilmes.Api.csproj", "{4E02FC61-AE19-4FA4-A1D7-C294A76B43BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76D2CE3A-DF3B-41ED-BE3A-01A7194BD613}"
+	ProjectSection(SolutionItems) = preProject
+		README.me = README.me
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
