@@ -25,8 +25,8 @@ namespace CopaFilmes.Api.Controllers
             if (usuario != null && !string.IsNullOrWhiteSpace(usuario.UserID))
             {
                 credenciaisValidas = (usuario != null &&
-                    usuario.UserID == "lambda3" &&
-                    usuario.AccessKey == "lambda3");
+                    usuario.UserID == "brasil" &&
+                    usuario.AccessKey == "minasgerais");
             }
 
             if (credenciaisValidas)
