@@ -20,7 +20,7 @@ namespace CopaFilmesApp.ViewModels
         private bool CanExecuteLogin()
         {
             return !(string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Senha) ||
-                                    UserName.Length != 7 || Senha.Length != 7);
+                                    UserName.Length < 6 || Senha.Length < 8);
         }
 
         private async Task Login()
